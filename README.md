@@ -1,5 +1,6 @@
+# About
 This application represents standard night in Brno citizen.  
-He wants to go a bar, have some fun and end up in bed.
+Our hero wants to go a bar, have some fun and end up in bed.
 
 We are going to use Xstate library to write state machine controlling the application state.
 
