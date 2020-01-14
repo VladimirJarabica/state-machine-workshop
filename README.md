@@ -124,7 +124,7 @@ const lightDelayMachine = Machine({
 ```
 
 # Assignment
-Create state machine representing ability to go to bar, drink specified drinks, fight and end up in police or hospital. Eventualy ending at home, which is final state.
+Create state machine representing ability to go to bar, drink specified drinks, fight and end up in police or hospital. Eventualy ending at home, which is a final state.
 
 From street you can go to bar and back. You can go home also, but not back.
 
