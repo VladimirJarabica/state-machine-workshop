@@ -15,7 +15,7 @@ export const DRINK_PRICES = {
 export const BAIL = 500;
 export const HEALING_PRICE = 100;
 
-const barBarMachine = Machine(
+const barBarTour = Machine(
   {
     id: "barbar",
     initial: "street",
@@ -57,7 +57,7 @@ const barBarMachine = Machine(
               cond: "canFightButLoose"
             }
           ],
-          GO_HOME: "home"
+          GO_TO_STREET: "street"
         }
       },
       drinking: {
@@ -87,11 +87,15 @@ const barBarMachine = Machine(
       },
       hospital: {
         on: {
-          CANT_RECOVER: "street",
           PAY_TO_HEAL: {
             target: "bar",
             actions: "payForHealing",
             cond: "canAffordHealtCare"
+          }
+        },
+        after: {
+          10000: {
+            target: "street"
           }
         }
       },
@@ -103,16 +107,11 @@ const barBarMachine = Machine(
   {
     actions: {
       drink: assign({
-        drunkLevel: (context, event) => {
-          console.log("drink level", event);
-          return context.drunkLevel + DRUNK_LEVELS[event.type];
-        }
+        drunkLevel: (context, event) =>
+          context.drunkLevel + DRUNK_LEVELS[event.type]
       }),
       pay: assign({
-        money: (context, event) => {
-          console.log("money", context.money, DRINK_PRICES);
-          return context.money - DRINK_PRICES[event.type];
-        }
+        money: (context, event) => context.money - DRINK_PRICES[event.type]
       }),
       payForHealing: assign({
         drunkLevel: context => Math.floor(context.drunkLevel / 2),
@@ -135,4 +134,5 @@ const barBarMachine = Machine(
     }
   }
 );
-export default barBarMachine;
+
+export default barBarTour;

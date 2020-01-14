@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 
 const Choice = ({ disabled, ...props }) => (
   <Wrapper disabled={disabled}>
-    <ListChoice disabled={disabled} {...props} />
+    <ListChoice {...props} />
   </Wrapper>
 );
 

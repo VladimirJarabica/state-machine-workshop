@@ -9,6 +9,8 @@ import Street from "./components/states/Street";
 import Bar from "./components/states/Bar";
 import Drinking from "./components/states/Drinking";
 import Police from "./components/states/Police";
+import Home from "./components/states/Home";
+import Hospital from "./components/states/Hospital";
 
 function App() {
   const [current, send] = useMachine(barBarMachine);
@@ -16,6 +18,7 @@ function App() {
   useEffect(() => {
     console.log("current state", current);
   }, [current.value]);
+
   return (
     <Layout type="Booking">
       <LayoutColumn>
@@ -30,6 +33,12 @@ function App() {
         )}
         {current.matches("police") && (
           <Police context={current.context} send={send} />
+        )}
+        {current.matches("hospital") && (
+          <Hospital context={current.context} send={send} />
+        )}
+        {current.matches("home") && (
+          <Home context={current.context} send={send} />
         )}
       </LayoutColumn>
       <LayoutColumn>
