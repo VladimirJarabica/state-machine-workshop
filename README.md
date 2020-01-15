@@ -136,3 +136,22 @@ You can fight from drunk level 3. Till drunk level 6, you can win, but end up in
 In police, you can pay the BAIL and be returned to street (if you have money). Without payment after 10 seconds police will take you home directly.
 
 In hospital, you can pay for the healthcare and with half of the drunk level return to street. After 10 seconds you'll be returned to street anyway with same drunk level.
+
+Go to `src/stateMachine/barBarMachine.js` and start coding!
+
+### Steps:
+
+#### 0. Fill constants
+Let's add values we will be working with.
+
+#### 1. Add missing states
+There are some  missing states - like Home (and more?)
+
+#### 2. Add transitions
+Transitions between states.
+
+#### 3. Guards
+Add guards for allowing entering transitions.
+
+#### 4. Actions
+Add actions for adjusting context data by requirements.

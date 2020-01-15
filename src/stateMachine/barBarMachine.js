@@ -1,19 +1,23 @@
 import { Machine, assign } from "xstate";
 
 export const DRUNK_LEVELS = {
-  BOROVICKA: 3,
-  BEER: 2,
-  WINE: 2
+  BOROVICKA: _,
+  BEER: _,
+  WINE: _
 };
 
 export const DRINK_PRICES = {
-  BOROVICKA: 30,
-  BEER: 40,
-  WINE: 55
+  BOROVICKA: _,
+  BEER: _,
+  WINE: _
 };
 
-export const BAIL = 500;
-export const HEALING_PRICE = 100;
+export const BAIL = _;
+export const HEALING_PRICE = _;
+
+const DRUNK_LEVEL_CAN_FIGHT = _;
+const DRUNK_LEVEL_CAN_WIN = _;
+const DRUNK_LEVEL_CAN_NOT_WIN = _;
 
 const barBarTour = Machine(
   {
@@ -21,7 +25,7 @@ const barBarTour = Machine(
     initial: "street",
     context: {
       drunkLevel: 0,
-      money: 1000
+      money: _
     },
     states: {
       street: {
@@ -42,10 +46,7 @@ const barBarTour = Machine(
           }
         }
       },
-      hospital: {},
-      home: {
-        type: "final"
-      }
+      hospital: {}
     }
   },
   {
