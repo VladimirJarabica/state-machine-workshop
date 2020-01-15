@@ -1,46 +1,44 @@
 import React from "react";
 import Card, { CardSection } from "@kiwicom/orbit-components/lib/Card";
 import Choice from "../Choice";
-import { DRINK_PRICES } from "../../stateMachine/barBarMachine";
 
-const Bar = ({ context, send }) => (
+const Data = {
+  BOROVICKA: {
+    icon: "🥛",
+    title: "Borovička",
+    description: "Reasonable choice for brave adventurers"
+  },
+  BEER: {
+    title: "Beer",
+    description: "Every true man deserve his reward",
+    icon: "🍺"
+  },
+  WINE: {
+    title: "Wine",
+    description: "Classy delicacy",
+    icon: "🍷"
+  },
+  GO_TO_STREET: {
+    title: "Street",
+    description: "Go back to the street",
+    icon: "🚪"
+  }
+};
+
+const Bar = ({ context, send, allowed = [] }) => (
   <Card>
     <CardSection header="Bar">
-      <Choice
-        title="Borovička"
-        description="Reasonable choice for brave adventurers"
-        icon={<span>🥛</span>}
-        onClick={() => {
-          send("BOROVICKA");
-        }}
-        disabled={context.money < DRINK_PRICES.BOROVICKA}
-      />
-      <Choice
-        title="Beer"
-        description="Every true man deserve his reward"
-        icon={<span>🍺</span>}
-        onClick={() => {
-          send("BEER");
-        }}
-        disabled={context.money < DRINK_PRICES.BEER}
-      />
-      <Choice
-        title="Wine"
-        description="Classy delicacy"
-        icon={<span>🍷</span>}
-        onClick={() => {
-          send("WINE");
-        }}
-        disabled={context.money < DRINK_PRICES.WINE}
-      />
-      <Choice
-        title="Street"
-        description="Go back to the street"
-        icon={<span>🚪</span>}
-        onClick={() => {
-          send("GO_TO_STREET");
-        }}
-      />
+      {Object.entries(Data).map(([key, value]) => (
+        <Choice
+          {...value}
+          key={key}
+          icon={<span>{value.icon}</span>}
+          onClick={() => {
+            send(key);
+          }}
+          disabled={!allowed.includes(key)}
+        />
+      ))}
     </CardSection>
     <CardSection>
       <Choice
