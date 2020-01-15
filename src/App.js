@@ -17,7 +17,14 @@ function App() {
 
   useEffect(() => {
     console.log("current state", current);
-  }, [current.value]);
+  }, [current, current.value]);
+
+  const allowed = current.nextEvents.filter(nextEvent => {
+    return barBarMachine.transition(current, {
+      type: nextEvent /* ... */
+    }).changed
+  })
+  console.log("allowed", allowed)
 
   return (
     <Layout type="Booking">
@@ -26,7 +33,7 @@ function App() {
           <Street context={current.context} send={send} />
         )}
         {current.matches("bar") && (
-          <Bar context={current.context} send={send} />
+          <Bar context={current.context} send={send} allowed={allowed} />
         )}
         {current.matches("drinking") && (
           <Drinking context={current.context} send={send} />

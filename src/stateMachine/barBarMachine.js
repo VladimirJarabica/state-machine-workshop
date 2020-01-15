@@ -1,19 +1,19 @@
 import { Machine, assign } from "xstate";
 
-export const DRUNK_LEVELS = {
+const DRUNK_LEVELS = {
   BOROVICKA: 3,
   BEER: 2,
   WINE: 2
 };
 
-export const DRINK_PRICES = {
+const DRINK_PRICES = {
   BOROVICKA: 30,
   BEER: 40,
   WINE: 55
 };
 
-export const BAIL = 500;
-export const HEALING_PRICE = 100;
+const BAIL = 500;
+const HEALING_PRICE = 100;
 
 const barBarTour = Machine(
   {
@@ -21,7 +21,7 @@ const barBarTour = Machine(
     initial: "street",
     context: {
       drunkLevel: 0,
-      money: 1000
+      money: 100
     },
     states: {
       street: {
@@ -35,17 +35,17 @@ const barBarTour = Machine(
           BOROVICKA: {
             target: "drinking",
             actions: ["drink", "pay"],
-            cond: "canAffordBorovicka"
+            cond: "canAffordDrink"
           },
           BEER: {
             target: "drinking",
             actions: ["drink", "pay"],
-            cond: "canAffordBeer"
+            cond: "canAffordDrink"
           },
           WINE: {
             target: "drinking",
             actions: ["drink", "pay"],
-            cond: "canAffordWine"
+            cond: "canAffordDrink"
           },
           FIGHT: [
             {
@@ -123,9 +123,9 @@ const barBarTour = Machine(
     },
     guards: {
       canStand: context => context.drunkLevel < 10,
-      canAffordBorovicka: context => context.money >= DRINK_PRICES.BOROVICKA,
-      canAffordBeer: context => context.money >= DRINK_PRICES.BEER,
-      canAffordWine: context => context.money >= DRINK_PRICES.WINE,
+      canAffordDrink: (context, event) => {
+        return context.money >= DRINK_PRICES[event.type];
+      },
       canFightAndWin: context =>
         context.drunkLevel > 3 && context.drunkLevel < 7,
       canFightButLoose: context => context.drunkLevel >= 7,
@@ -135,4 +135,8 @@ const barBarTour = Machine(
   }
 );
 
-export default barBarTour;
+export {
+  barBarTour as default,
+  BAIL,
+  HEALING_PRICE
+};

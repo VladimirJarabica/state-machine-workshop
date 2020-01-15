@@ -4,7 +4,8 @@ import ListChoice from "@kiwicom/orbit-components/lib/ListChoice";
 
 const Wrapper = styled.div`
   & > div {
-    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "inherit")};
+    cursor: ${({ disabled }) => (disabled ? "not-allowed" : "pointer")};
+    opacity: ${({ disabled }) => (disabled ? .7 : 1)};
   }
 `;
 
