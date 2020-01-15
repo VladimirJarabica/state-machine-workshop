@@ -8,7 +8,7 @@ const Stats = ({ context }) => (
     <CardSection header="Your stats">
       <Stack direction="row" justify="between">
         <Text weight="bold">💰 Money</Text>
-        <Text>{context.money} $</Text>
+        <Text>{context.money} CZK</Text>
       </Stack>
       <Stack direction="row" justify="between">
         <Text weight="bold">🥳 Drunk level </Text>
